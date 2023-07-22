@@ -93,7 +93,7 @@ namespace DIRS21.API.Tests.Controllers
             Product productEntity = A.Fake<Product>();
             ProductDto productDto = A.Fake<ProductDto>();
 
-            A.CallTo(() => _productRepository.GetProductById(request)).Returns(productEntity);
+            A.CallTo(() => _productRepository.FindByIdAsync(request)).Returns(productEntity);
             A.CallTo(() => _mapper.Map<ProductDto>(productEntity)).Returns(productDto);
 
             ProductsController controller = new ProductsController(_mapper, _productRepository);
@@ -114,6 +114,33 @@ namespace DIRS21.API.Tests.Controllers
             #endregion
         }
 
+        [Fact]
+        public void ProductController_DeleteProduct_ReturnsOk()
+        {
+            #region Arrange
+
+            string id = "1";
+            bool updateResult = true;
+
+            A.CallTo(() => _productRepository.DeleteByIdAsync(id)).Returns(updateResult);
+
+            ProductsController controller = new ProductsController(_mapper, _productRepository);
+
+            #endregion
+
+            #region Act
+
+            var result = controller.DeleteProduct(id).Result;
+
+            #endregion
+
+            #region Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<OkObjectResult>();
+
+
+            #endregion
+        }
         [Fact]
         public void ProductController_GetProducts_ReturnsOk()
         {

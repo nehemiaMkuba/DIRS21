@@ -26,7 +26,7 @@ namespace Core.Management.Interfaces {
 
         Task UpdateOneAsync<TField>(Expression<Func<TDocument, TField>> filterExpression, TField fieldValue, List<(Expression<Func<TDocument, TField>> setExpression, TField setFieldValue)> setExpressions);
 
-        Task DeleteByIdAsync(string id);
+        Task<bool> DeleteByIdAsync(string id);
 
         Task<List<TDocument>> FilterBy(Expression<Func<TDocument, bool>> filterExpression);
         Task<(IEnumerable<TDocument> tdocuments, int newStartIndex, int newPageSize, long totalCount)> FilterByPaginated(Expression<Func<TDocument, bool>> filterExpression, int offset, int pageSize);

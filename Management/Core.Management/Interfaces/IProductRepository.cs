@@ -12,7 +12,6 @@ namespace Core.Management.Interfaces
         Task<IEnumerable<string>> CreateIndexes();
         Task<Product> CreateProduct(ProductCategory categoryName, int capacity, decimal pricePerNight);
         Task<bool> EditProduct(string id, ProductCategory? categoryName, int? capacity, decimal? pricePerNight);
-        Task<Product> GetProductById(string id);
         Task<(IEnumerable<Product> products, int totalCount)> GetProductList(ProductCategory? categoryName, int? capacity, decimal? pricePerNight, string startingAfterProductId, string endingBeforeProductId);
     }
 }

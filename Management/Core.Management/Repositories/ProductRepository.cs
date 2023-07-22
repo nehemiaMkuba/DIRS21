@@ -73,11 +73,6 @@ namespace Core.Management.Repositories
             return true;
         }
 
-        public async Task<Product> GetProductById(string id)
-        {
-            return await FindByIdAsync(id).ConfigureAwait(false);
-        }
-
         public async Task<(IEnumerable<Product> products, int totalCount)> GetProductList(ProductCategory? categoryName, int? capacity, decimal? pricePerNight, string startingAfterProductId, string endingBeforeProductId)
         {
             FilterDefinitionBuilder<Product> builder = Builders<Product>.Filter;

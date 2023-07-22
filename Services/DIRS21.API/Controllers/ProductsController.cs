@@ -73,18 +73,31 @@ namespace DIRS21.API.Controllers
         [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProduct([FromRoute, Required] string id)
         {
-            return Ok(_mapper.Map<ProductDto>(await _productRepository.GetProductById(id)));
+            return Ok(_mapper.Map<ProductDto>(await _productRepository.FindByIdAsync(id)));
         }
 
-       /// <summary>
-       /// Return paginated list of products its uses cursor based pagination where users should specify records between certain range
-       /// </summary>
-       /// <param name="categoryName"></param>
-       /// <param name="capacity"></param>
-       /// <param name="pricePerNight"></param>
-       /// <param name="startingAfterProductId"></param>
-       /// <param name="endingBeforeProductId"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// Delete product by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete, Route("{id}")]
+        [Produces(MediaTypeNames.Application.Json), Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteProduct([FromRoute, Required] string id)
+        {
+            return Ok(await _productRepository.DeleteByIdAsync(id));
+        }
+
+        /// <summary>
+        /// Return paginated list of products its uses cursor based pagination where users should specify records between certain range
+        /// </summary>
+        /// <param name="categoryName"></param>
+        /// <param name="capacity"></param>
+        /// <param name="pricePerNight"></param>
+        /// <param name="startingAfterProductId"></param>
+        /// <param name="endingBeforeProductId"></param>
+        /// <returns></returns>
         [HttpGet, Route("list"), AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json), Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(ResponseObject<ProductDto>), (int)HttpStatusCode.OK)]

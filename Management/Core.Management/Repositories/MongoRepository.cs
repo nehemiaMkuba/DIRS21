@@ -28,7 +28,7 @@ namespace Core.Management.Repositories
         public async Task CreateCollectionAsync()
         {
             IAsyncCursor<BsonDocument> collections = await _database.ListCollectionsAsync(new ListCollectionsOptions { Filter = new BsonDocument("name", _collectionName) });
-           
+
             if (!await collections.AnyAsync().ConfigureAwait(false))
             {
                 await _database.CreateCollectionAsync(_collectionName, options: new CreateCollectionOptions() { Collation = new Collation("en_US", strength: CollationStrength.Secondary) }).ConfigureAwait(false);
@@ -87,11 +87,13 @@ namespace Core.Management.Repositories
             await _collection.UpdateOneAsync(filterDefinition, updateDefinitionBuilder.Combine(updateDefinitions)).ConfigureAwait(false);
         }
 
-        public async Task DeleteByIdAsync(string id)
+        public async Task<bool> DeleteByIdAsync(string id)
         {
             FilterDefinition<TDocument> filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
-            
-            await _collection.DeleteOneAsync(filter).ConfigureAwait(false); ;
+
+            DeleteResult result = await _collection.DeleteOneAsync(filter).ConfigureAwait(false);
+
+            return result.IsAcknowledged;
         }
 
         public async Task<List<TDocument>> FilterBy(Expression<Func<TDocument, bool>> filterExpression)
