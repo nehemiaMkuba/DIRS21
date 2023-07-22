@@ -38,15 +38,13 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 	- Contain common classes reused across repositories are defined
   2. Extensions
 	- Contain object extension methods used across the repositories
-  3. Implementations
-	- Contain concrete implentantions of repositories
-  4. Infrastructure
+  3. Infrastructure
 	- Contain intergration event publishers and handlers are defined
-  5. Interfaces
+  4. Interfaces
 	- Contains contract definition of repositories interfaces
-  6. Repository
+  5. Repository
 	- Contains implementation of generic repos used across the business logic
-  7. DependencyInjection
+  6. DependencyInjection
 	- Contain an extension method  used for dependency injection of repositories, event publishers and subscribers
   
 # Services(Contain clients to our business logic either web api, background jobs, Webapps)
