@@ -23,7 +23,10 @@ namespace Core.Domain.Entities
 
     public class BookedDates
     {
+        [BsonElement("startAt")]
         public DateTime StartAt { get; set; }
+
+        [BsonElement("endAt")]
         public DateTime EndAt { get; set; }
     }
 }
