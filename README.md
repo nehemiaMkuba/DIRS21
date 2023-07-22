@@ -6,56 +6,56 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 
 # Core.Domain(Contain database configuration classes)
- # Entity
-   - Contain definitions for schema classes that will be used in creating collections in our document database
- # Enums
-   - Central location for defining constants used as properties in entities
- # Exception
-   - Defining a global class that will be instantiated to throw handled exceptions
- # Infrastructure
-	# Services
+  1. Entity
+	- Contain definitions for schema classes that will be used in creating collections in our document database
+  2. Enums
+	- Central location for defining constants used as properties in entities
+  3. Exception
+	- Defining a global class that will be instantiated to throw handled exceptions
+  4. Infrastructure
+	1. Services
 	  - Define DateTimeService used across the application for date purposes
- # Dependency injection 
-   - Contain an extension method  used for dependency injection of mongodb client to initiate connection to the MongoDB
+  6. Dependency injection 
+	- Contain an extension method  used for dependency injection of mongodb client to initiate connection to the MongoDB
 
 # Core.Management(Contain logic for implementing business requirements)
-  # Common
-   - Contain common classes reused across repositories are defined
-  # Extensions
-   - Contain object extension methods used across the repositories
-  # Implementations
-   - Contain concrete implentantions of repositories
-  # Infrastructure
-   - Contains intergration event publishers and handlers are defined
-  # Interfaces
-   - Contains contract definition of repositories interfaces
-  # Repository
-   -Contains implementation of generic repos used across the business logic
-  # DependencyInjection
-   -Contain an extension method  used for dependency injection of repositories, event publishers and subscribers
+  1. Common
+	- Contain common classes reused across repositories are defined
+  2. Extensions
+	- Contain object extension methods used across the repositories
+  3. Implementations
+	- Contain concrete implentantions of repositories
+  4. Infrastructure
+	- Contains intergration event publishers and handlers are defined
+  5. Interfaces
+	- Contains contract definition of repositories interfaces
+  6. Repository
+	- Contains implementation of generic repos used across the business logic
+  7. DependencyInjection
+	- Contain an extension method  used for dependency injection of repositories, event publishers and subscribers
   
 # Services(Contain clients to our business logic either web api, background jobs, Webapps)
   # DIRS21.API
-   # Properties
+   1. Properties
 	    - Contain the configuration information, which describes how to start the ASP.NET Core application, using Visual Studio
-   # Controllers
+   2. Controllers
 	    - Contain controllers used to define endpoints that will be accessed externally over the web
-   # Attributes
+   3. Attributes
       - Contain attributes that are used to decorate controllers and views for either documentation or accessibility
-   # Common
+   4. Common
 	    - Contain definition of common objects reused in api
-   # Filters
+   5. Filters
 	   - Used to define custom made filters used to allow code to run before or after specific stages in the request processing pipeline.
-	   - An exception filter that runs when exceptions are thrown
-	   - An modelstate filter that runs when model request submitted are not valid
-	   - Swagger based filters for swagger documentation
-   # Models
-   # DTOS
-	  - Contain definition for request and return objects used in our action
-	  - Contain an automapper class used to map our entities to Dtos
-  # Program
-     - Contain logging configurations and invocation of seed methods
-  # Start
+	- An exception filter that runs when exceptions are thrown
+	- An modelstate filter that runs when model request submitted are not valid
+	- Swagger based filters for swagger documentation
+   6. Models
+   7. DTOS
+	- Contain definition for request and return objects used in our action
+	- Contain an automapper class used to map our entities to Dtos
+   8. Program
+	- Contain logging configurations and invocation of seed methods
+  9. Start
 	 - Calls the dependency injection extension methods in the Common.Domain and Common.Management project
 	 - Contain API versioning dependency injection logic
 	 - Contain filter dependency injection logic
@@ -63,7 +63,7 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 	 - Contain JWT Security Pipeline logic and its dependency injection
 
 # Unit tests
- - Contain unit test logic for our controllers and repositories
- - Uses X unit test tool
- - Uses FluentAssertion nugets for assertions
- - Uses FakeItEasy nugets for mocking dependencies and objects
+	- Contain unit test logic for our controllers and repositories
+	- Uses X unit test tool
+	- Uses FluentAssertion nugets for assertions
+	- Uses FakeItEasy nugets for mocking dependencies and objects
