@@ -49,8 +49,8 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 	   - An exception filter that runs when exceptions are thrown
 	   - An modelstate filter that runs when model request submitted are not valid
 	   - Swagger based filters for swagger documentation
-	 # Models
-	  # DTOS
+   # Models
+   # DTOS
 	  - Contain definition for request and return objects used in our action
 	  - Contain an automapper class used to map our entities to Dtos
   # Program
