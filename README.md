@@ -9,7 +9,7 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
  # Entity
    - Contain definitions for schema classes that will be used in creating collections in our document database
  # Enums
-  - Central location for defining constants used as properties in entities
+   - Central location for defining constants used as properties in entities
  # Exception
    - Defining a global class that will be instantiated to throw handled exceptions
  # Infrastructure
@@ -36,15 +36,15 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
   
 # Services(Contain clients to our business logic either web api, background jobs, Webapps)
   # DIRS21.API
-    # Properties
+   # Properties
 	    - Contain the configuration information, which describes how to start the ASP.NET Core application, using Visual Studio
-	  # Controllers
+   # Controllers
 	    - Contain controllers used to define endpoints that will be accessed externally over the web
-	  # Attributes
+   # Attributes
       - Contain attributes that are used to decorate controllers and views for either documentation or accessibility
-	  # Common
+   # Common
 	    - Contain definition of common objects reused in api
-	  # Filters
+   # Filters
 	   - Used to define custom made filters used to allow code to run before or after specific stages in the request processing pipeline.
 	   - An exception filter that runs when exceptions are thrown
 	   - An modelstate filter that runs when model request submitted are not valid
@@ -53,9 +53,9 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 	  # DTOS
 	  - Contain definition for request and return objects used in our action
 	  - Contain an automapper class used to map our entities to Dtos
-	# Program
+  # Program
      - Contain logging configurations and invocation of seed methods
-	# Start
+  # Start
 	 - Calls the dependency injection extension methods in the Common.Domain and Common.Management project
 	 - Contain API versioning dependency injection logic
 	 - Contain filter dependency injection logic
