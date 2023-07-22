@@ -24,6 +24,8 @@ namespace Core.Management.Interfaces {
 
         Task<long> CountDocuments(Expression<Func<TDocument, bool>> filterExpression);
 
+        IQueryable<TDocument> AsQueryable();
+
         Task UpdateOneAsync<TField>(Expression<Func<TDocument, TField>> filterExpression, TField fieldValue, List<(Expression<Func<TDocument, TField>> setExpression, TField setFieldValue)> setExpressions);
 
         Task<bool> DeleteByIdAsync(string id);

@@ -50,6 +50,20 @@ namespace DIRS21.API.Controllers
         }
 
         /// <summary>
+        /// Get availabilty of a product category between date range
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost, Route("availability")]
+        [Produces(MediaTypeNames.Application.Json), Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+
+        public async Task<IActionResult> Availabity([FromBody, Required] AvailabilityRequest request)
+        {
+            return Ok(await _productRepository.Availability(request.ProductCategory, request.StartAt, request.EndAt));
+        }
+
+        /// <summary>
         /// Edit products
         /// </summary>
         /// <param name="request"></param>
@@ -62,6 +76,7 @@ namespace DIRS21.API.Controllers
         {
             return Ok(await _productRepository.EditProduct(request.Id, request.CategoryName, request.Capacity, request.PricePerNight));
         }
+
 
         /// <summary>
         /// Get product by Id
@@ -101,7 +116,7 @@ namespace DIRS21.API.Controllers
         [HttpGet, Route("list"), AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json), Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(ResponseObject<ProductDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetProducts(ProductCategory? categoryName, int? capacity, decimal? pricePerNight, string startingAfterProductId, string endingBeforeProductId)
+        public async Task<IActionResult> GetProducts([FromQuery] ProductCategory? categoryName, [FromQuery] int? capacity, [FromQuery] decimal? pricePerNight, [FromQuery] string startingAfterProductId, [FromQuery] string endingBeforeProductId)
         {
             (IEnumerable<Product> products, int totalCount) = await _productRepository.GetProductList(categoryName, capacity, pricePerNight, startingAfterProductId, endingBeforeProductId);
             return Ok(new ResponseObject<ProductDto>

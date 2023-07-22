@@ -52,7 +52,6 @@ namespace DIRS21.API.Tests.Controllers
 
             result.Should().NotBeNull();
             result.Should().BeOfType<CreatedResult>();
-
             #endregion
         }
 
@@ -130,8 +129,8 @@ namespace DIRS21.API.Tests.Controllers
 
             #region Act
 
-            var result = controller.DeleteProduct(id).Result;
-
+            IActionResult? result = controller.DeleteProduct(id).Result;
+            
             #endregion
 
             #region Assert

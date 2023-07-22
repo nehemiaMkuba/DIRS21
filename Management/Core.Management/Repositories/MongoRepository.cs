@@ -10,6 +10,7 @@ using MongoDB.Driver;
 using Core.Domain.Exceptions;
 using Core.Management.Interfaces;
 using Core.Domain.Entities.Documents;
+using System.Linq;
 
 namespace Core.Management.Repositories
 {
@@ -70,6 +71,11 @@ namespace Core.Management.Repositories
         public async Task<long> CountDocuments(Expression<Func<TDocument, bool>> filterExpression)
         {
             return await _collection.CountDocumentsAsync(filterExpression).ConfigureAwait(false);
+        }
+
+        public IQueryable<TDocument> AsQueryable()
+        {
+            return _collection.AsQueryable();
         }
 
         public async Task UpdateOneAsync<TField>(Expression<Func<TDocument, TField>> filterExpression, TField fieldValue, List<(Expression<Func<TDocument, TField>> setExpression, TField setFieldValue)> setExpressions)

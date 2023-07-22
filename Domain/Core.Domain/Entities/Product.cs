@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 using Core.Domain.Enums;
@@ -15,5 +16,14 @@ namespace Core.Domain.Entities
 
         [BsonElement("pricePerNight")]
         public decimal PricePerNight { get; set; }
+
+        [BsonElement("bookedDates")]
+        public BookedDates[] BookedDates { get; set; }
+    }
+
+    public class BookedDates
+    {
+        public DateTime StartAt { get; set; }
+        public DateTime EndAt { get; set; }
     }
 }

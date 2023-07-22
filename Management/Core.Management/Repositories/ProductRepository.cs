@@ -11,6 +11,7 @@ using Core.Domain.Enums;
 using Core.Domain.Entities;
 using Core.Management.Common;
 using Core.Management.Interfaces;
+using System.Linq;
 
 namespace Core.Management.Repositories
 {
@@ -23,6 +24,7 @@ namespace Core.Management.Repositories
         {
 
         }
+
         public async Task CreateCollection()
         {
             await CreateCollectionAsync().ConfigureAwait(false);
@@ -43,8 +45,6 @@ namespace Core.Management.Repositories
         public async Task<Product> CreateProduct(ProductCategory categoryName, int capacity, decimal pricePerNight)
         {
             Product? product = await ValidateFindOneAsync(x => x.CategoryName == categoryName, throwException: false, inverseCheck: true).ConfigureAwait(false);
-
-            if (product != null) return product;
 
             product = new Product
             {
@@ -71,6 +71,13 @@ namespace Core.Management.Repositories
             await UpdateOneAsync(x => x.Id, id, setExpression).ConfigureAwait(false);
 
             return true;
+        }
+
+        public async Task<bool> Availability(ProductCategory categoryName, DateTime startDate, DateTime endDate)
+        {
+            Product product = await ValidateFindOneAsync(x => x.CategoryName == categoryName).ConfigureAwait(false);
+
+            return product.BookedDates.Any(x => x.StartAt >= startDate && x.EndAt <= endDate);
         }
 
         public async Task<(IEnumerable<Product> products, int totalCount)> GetProductList(ProductCategory? categoryName, int? capacity, decimal? pricePerNight, string startingAfterProductId, string endingBeforeProductId)
