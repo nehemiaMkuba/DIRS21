@@ -2,12 +2,9 @@ using System;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 using Sentry.Extensions.Logging;
-
-using Core.Management.Infrastructure.IntegrationEvents.EventHandling;
 using Core.Management.Infrastructure.Seedwork;
 
 namespace DIRS21.API

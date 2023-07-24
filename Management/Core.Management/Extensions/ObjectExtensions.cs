@@ -6,7 +6,6 @@ using System.Globalization;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.ComponentModel.DataAnnotations;
 
 using Core.Domain.Exceptions;
 
@@ -117,46 +116,6 @@ namespace Core.Management.Extensions
             return DateTimeOffset.FromUnixTimeSeconds(value).DateTime.ToLocalTime();
         }
 
-        public static IEnumerable<string> Validate(object value)
-        {
-            if (value.IsNull())
-            {
-                yield return "Please provide a valid object for this request";
-            }
-
-            Type type = value.GetType();
-            PropertyInfo[] properties = type.GetProperties();
-            Type attrType = typeof(ValidationAttribute);
-
-            foreach (PropertyInfo propertyInfo in properties)
-            {
-                object[] customAttributes = propertyInfo.GetCustomAttributes(attrType, inherit: true);
-
-                foreach (object customAttribute in customAttributes)
-                {
-                    ValidationAttribute validationAttribute = (ValidationAttribute)customAttribute;
-
-                    bool isValid = validationAttribute.IsValid(propertyInfo.GetValue(value, BindingFlags.GetProperty, null, null, null));
-
-                    if (!isValid)
-                    {
-                        yield return validationAttribute.ErrorMessage;
-                    }
-                }
-            }
-        }
-
-        public static string ValidateModel(object value)
-        {
-            if (value.IsNull())
-            {
-                return "Please provide a valid object for this request";
-            }
-
-            return string.Join(" >> ", TypeDescriptor.GetProperties(value.GetType()).Cast<PropertyDescriptor>()
-                .SelectMany(pd => pd.Attributes.OfType<ValidationAttribute>().Where(va => !va.IsValid(pd.GetValue(value))))
-                .Select(xx => xx.ErrorMessage));
-        }
 
         public static string ToParsedDate(this DateTime value, string dateFormat)
         {

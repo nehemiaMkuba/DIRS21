@@ -23,7 +23,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DIRS21.API.Controllers
 {
-    [Route("v{version:apiVersion}/product"), SwaggerOrder("B")]
+    [Route("v{version:apiVersion}/products"), SwaggerOrder("B")]
     [Authorize(Policy = nameof(AuthPolicy.GlobalRights))]
     public class ProductsController : ControllerBase
     {
