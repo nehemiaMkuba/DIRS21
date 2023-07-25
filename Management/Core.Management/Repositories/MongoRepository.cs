@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using MongoDB.Driver;
 using Core.Domain.Exceptions;
 using Core.Management.Interfaces;
 using Core.Domain.Entities.Documents;
-using System.Linq;
 
 namespace Core.Management.Repositories
 {

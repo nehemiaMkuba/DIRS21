@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ using Core.Domain.Enums;
 using Core.Domain.Entities;
 using Core.Management.Common;
 using Core.Management.Interfaces;
-using System.Linq;
 
 namespace Core.Management.Repositories
 {
@@ -60,7 +60,7 @@ namespace Core.Management.Repositories
 
         public async Task<bool> EditProduct(string id, ProductCategory? categoryName, int? capacity, decimal? pricePerNight)
         {
-            Product product = await ValidateFindOneAsync(x => x.CategoryName == categoryName).ConfigureAwait(false);
+            Product product = await ValidateFindOneAsync(x => x.Id == id).ConfigureAwait(false);
 
             List<(Expression<Func<Product, object>> setExpression, object setFieldValue)> setExpression = new List<(Expression<Func<Product, object>> setExpression, object setFieldValue)>();
 
