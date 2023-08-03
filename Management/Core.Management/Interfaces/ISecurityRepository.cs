@@ -8,11 +8,12 @@ using System.Linq.Expressions;
 
 namespace Core.Management.Interfaces
 {
-    public interface ISecurityRepository: IMongoRepository<Client>
+    public interface ISecurityRepository
     {
         Task CreateCollection();
         Task<IEnumerable<string>> CreateIndexes();
         Task<Client> CreateClient(string name, string contactEmail, string description);
+        Task<Client> ValidateFindOneAsync(Expression<Func<Client, bool>> filterExpression, bool throwException = false);
         Task<Client> AssignClientRole(string clientId, Roles role);
         (string token, long expires) CreateAccessToken(Client client);
         Task<(string token, long expires)> ExtendAccessTokenLifetime(string accessToken, string appSecret);

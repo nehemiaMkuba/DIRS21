@@ -14,6 +14,7 @@
     <PackageReference Include="AWSSDK.SQS" Version="3.7.0.13" />
     <PackageReference Include="IdGen" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="PluralizeService.Core" Version="1.2.21147.2" />
     <PackageReference Include="Redis.OM" Version="0.5.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.111" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.2" />

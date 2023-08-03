@@ -7,8 +7,10 @@ using System.Collections.Generic;
 
 using MongoDB.Bson;
 using MongoDB.Driver;
+using PluralizeService.Core;
 
 using Core.Domain.Exceptions;
+using Core.Management.Common;
 using Core.Management.Interfaces;
 using Core.Domain.Entities.Documents;
 
@@ -19,11 +21,12 @@ namespace Core.Management.Repositories
         private readonly string _collectionName;
         private readonly IMongoDatabase _database;
         protected readonly IMongoCollection<TDocument> _collection;
-        public MongoRepository(IMongoClient client, string databaseName, string collectionName)
+
+        public MongoRepository(IMongoClient client, IDocumentSetting setting)
         {
-            _collectionName = collectionName;
-            _database = client.GetDatabase(databaseName);
-            _collection = _database.GetCollection<TDocument>(collectionName);
+            _collectionName = PluralizationProvider.Pluralize(typeof(TDocument).Name);
+            _database = client.GetDatabase(setting.DatabaseName);
+            _collection = _database.GetCollection<TDocument>(_collectionName);
         }
 
         public async Task CreateCollectionAsync()
@@ -127,6 +130,11 @@ namespace Core.Management.Repositories
 
             return (collectionsTask.Result,
               totalCountTask.Result)!;
+        }
+
+        public async Task<TDocument> ValidateFindOneAsync(Expression<Func<TDocument, bool>> filterExpression)
+        {
+            return  await _collection.Find(filterExpression).FirstOrDefaultAsync().ConfigureAwait(false);
         }
     }
 }

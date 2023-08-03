@@ -18,12 +18,14 @@ namespace DIRS21.API.Models.DTOs.Requests
         /// Maximum limit of the product category
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "capacity must be specified")]
+        [Range(1, long.MaxValue, ErrorMessage = "capacity must be greater than 0")]
         public int Capacity { get; set; }
 
         /// <summary>
         /// Cost per night
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "pricePerNight must be specified")]
+        [Range(1, long.MaxValue, ErrorMessage = "capacity must be greater than 0")]
         public decimal PricePerNight { get; set; }
     }
 }

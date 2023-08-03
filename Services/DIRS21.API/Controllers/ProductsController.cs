@@ -88,7 +88,7 @@ namespace DIRS21.API.Controllers
         [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProduct([FromRoute, Required] string id)
         {
-            return Ok(_mapper.Map<ProductDto>(await _productRepository.FindByIdAsync(id)));
+            return Ok(_mapper.Map<ProductDto>(await _productRepository.ValidateFindOneAsync(id)));
         }
 
         /// <summary>

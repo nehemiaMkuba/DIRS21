@@ -14,7 +14,7 @@ namespace Core.Domain
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IDateTimeService, DateTimeService>();
-            services.AddSingleton<IMongoClient>(_ => new MongoClient(MongoClientSettings.FromConnectionString(configuration.GetConnectionString("DocumentConnection"))));
+            services.AddScoped<IMongoClient>(_ => new MongoClient(MongoClientSettings.FromConnectionString(configuration.GetConnectionString("DocumentConnection"))));
 
             return services;
         }

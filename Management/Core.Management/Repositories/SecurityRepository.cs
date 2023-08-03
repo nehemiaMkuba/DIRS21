@@ -23,18 +23,21 @@ using Core.Management.Interfaces;
 
 namespace Core.Management.Repositories
 {
-    public class SecurityRepository : MongoRepository<Client>, ISecurityRepository
+    public class SecurityRepository : ISecurityRepository
     {
         private readonly IConfiguration _configuration;
         private readonly ISecuritySetting _securitySetting;
+        private readonly IMongoRepository<Client>  _clientDataServiceFactory;
 
-        public SecurityRepository(IMongoClient client,
-            IDocumentSetting setting,
+
+        public SecurityRepository(
+           IMongoRepository<Client> clientDataServiceFactory,
             IOptions<SecuritySetting> config,
-            IConfiguration configuration) : base(client, setting.DatabaseName, setting.ClientsCollection)
+            IConfiguration configuration) 
         {
             _configuration = configuration;
             _securitySetting = config.Value;
+            _clientDataServiceFactory = clientDataServiceFactory;
         }
 
         public async Task<Client> CreateClient(string name, string contactEmail, string description)
@@ -53,7 +56,7 @@ namespace Core.Management.Repositories
                 Description = description ?? default
             };
 
-            await InsertOneAsync(client);
+            await _clientDataServiceFactory.InsertOneAsync(client);
 
             return client;
         }
@@ -62,7 +65,7 @@ namespace Core.Management.Repositories
         {
             string id = apiKey;
 
-            Client client = await FindByIdAsync(id).ConfigureAwait(false);
+            Client client = await _clientDataServiceFactory.FindByIdAsync(id).ConfigureAwait(false);
 
             if (!(client != null && client.IsActive && id == client.Id && appSecret == client.Secret)) return null;
 
@@ -117,7 +120,7 @@ namespace Core.Management.Repositories
 
             _ = Convert.FromBase64String(jti);
 
-            Client client = await FindByIdAsync(cli.ToString()).ConfigureAwait(false);
+            Client client = await _clientDataServiceFactory.FindByIdAsync(cli.ToString()).ConfigureAwait(false);
 
             if (client is null) throw new Exception($"Invalid cli {cli}");
             if (client.Secret != appSecret) throw new Exception($"Invalid appSecret {appSecret}");
@@ -127,7 +130,7 @@ namespace Core.Management.Repositories
 
         public async Task<Client> AssignClientRole(string clientId, Roles role)
         {
-            Client client = await FindByIdAsync(clientId).ConfigureAwait(false);
+            Client client = await _clientDataServiceFactory.FindByIdAsync(clientId).ConfigureAwait(false);
 
             if (client is null) throw new GenericException($"Client with id '{clientId}' could not be found", "DIRS21001", HttpStatusCode.NotFound);
             if (client.Role == Roles.Root && role != Roles.Root) throw new GenericException("Root role cannot be assigned or revoked", "DIRS21008", HttpStatusCode.Forbidden);
@@ -140,13 +143,13 @@ namespace Core.Management.Repositories
             setExpression.Add((x => x.Role, role));
             setExpression.Add((x => x.IsActive, true));
 
-            await UpdateOneAsync(x => x.Id, clientId.ToString(), setExpression);
+            await _clientDataServiceFactory.UpdateOneAsync(x => x.Id, clientId.ToString(), setExpression);
             return client;
         }
 
-        public async Task<Client> GetClientById(string clientId) => await FindByIdAsync(clientId.ToString()).ConfigureAwait(false);
+        public async Task<Client> GetClientById(string clientId) => await _clientDataServiceFactory.FindByIdAsync(clientId.ToString()).ConfigureAwait(false);
 
-        public async Task<List<Client>> GetClients() => await FilterBy(_ => true).ConfigureAwait(false);
+        public async Task<List<Client>> GetClients() => await _clientDataServiceFactory.FilterBy(_ => true).ConfigureAwait(false);
 
         public static string GenerateJti(string jti, string key)
         {
@@ -162,7 +165,7 @@ namespace Core.Management.Repositories
 
         public async Task CreateCollection()
         {
-            await CreateCollectionAsync().ConfigureAwait(false);
+            await _clientDataServiceFactory.CreateCollectionAsync().ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<string>> CreateIndexes()
@@ -173,7 +176,12 @@ namespace Core.Management.Repositories
                 new CreateIndexModel<Client>(Builders<Client>.IndexKeys.Ascending(indexKey => indexKey.Secret))
             };
            
-            return await CreateIndexesAsync(indexKeysDefine).ConfigureAwait(false);
+            return await _clientDataServiceFactory.CreateIndexesAsync(indexKeysDefine).ConfigureAwait(false);
+        }
+
+        public async Task<Client> ValidateFindOneAsync(Expression<Func<Client, bool>> filterExpression, bool throwException = false)
+        {
+            return await _clientDataServiceFactory.ValidateFindOneAsync(filterExpression, throwException: throwException).ConfigureAwait(false);
         }
     }
 }

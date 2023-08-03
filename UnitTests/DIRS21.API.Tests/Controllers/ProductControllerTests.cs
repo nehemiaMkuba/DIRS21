@@ -92,7 +92,7 @@ namespace DIRS21.API.Tests.Controllers
             Product productEntity = A.Fake<Product>();
             ProductDto productDto = A.Fake<ProductDto>();
 
-            A.CallTo(() => _productRepository.FindByIdAsync(request)).Returns(productEntity);
+            A.CallTo(() => _productRepository.ValidateFindOneAsync(request)).Returns(productEntity);
             A.CallTo(() => _mapper.Map<ProductDto>(productEntity)).Returns(productDto);
 
             ProductsController controller = new ProductsController(_mapper, _productRepository);

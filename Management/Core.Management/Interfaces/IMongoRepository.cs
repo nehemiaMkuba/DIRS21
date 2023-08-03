@@ -21,8 +21,8 @@ namespace Core.Management.Interfaces {
         Task<TDocument> FindByIdAsync(string id);
 
         Task<TDocument> ValidateFindOneAsync(Expression<Func<TDocument, bool>> filterExpression, bool inverseCheck = false, bool throwException = true);
-
-        Task<long> CountDocuments(Expression<Func<TDocument, bool>> filterExpression);
+        Task<TDocument> ValidateFindOneAsync(Expression<Func<TDocument, bool>> filterExpression);
+       Task<long> CountDocuments(Expression<Func<TDocument, bool>> filterExpression);
 
         IQueryable<TDocument> AsQueryable();
 
