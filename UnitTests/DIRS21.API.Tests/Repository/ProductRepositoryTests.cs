@@ -74,7 +74,7 @@ public class ProductRepositoryTests
 
     [Theory]
     [ClassData(typeof(EditProductTestData))]
-    public async Task ProductRepository_EditProduct_ReturnsOk(string id, ProductCategory? categoryName, int? capacity, decimal? pricePerNight, Object response)
+    public async Task ProductRepository_EditProduct_ThrowsException(string id, ProductCategory? categoryName, int? capacity, decimal? pricePerNight, Object response)
     {
 
         #region Arrange
