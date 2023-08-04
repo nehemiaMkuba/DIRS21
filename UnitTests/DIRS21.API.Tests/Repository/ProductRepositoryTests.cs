@@ -24,21 +24,10 @@ namespace DIRS21.API.Tests.Repository;
 
 public class ProductRepositoryTests
 {
-    private readonly IMapper _mapper;
-    private readonly IMongoClient _client;
-    private readonly IConfiguration _configuration;
-    private readonly IDateTimeService _dateTimeService;
-    private readonly IDocumentSetting _documentSetting;
-    private readonly IOptions<SecuritySetting> _securitySetting;
+
     private readonly IMongoRepository<Product> _productDataServiceFactory;
     public ProductRepositoryTests()
     {
-        _mapper = A.Fake<IMapper>();
-        _client = A.Fake<IMongoClient>();
-        _configuration = A.Fake<IConfiguration>();
-        _dateTimeService = A.Fake<IDateTimeService>();
-        _documentSetting = A.Fake<IDocumentSetting>();
-        _securitySetting = A.Fake<IOptions<SecuritySetting>>();
         _productDataServiceFactory = A.Fake<IMongoRepository<Product>>();
     }
 
@@ -60,7 +49,7 @@ public class ProductRepositoryTests
 
         #region Act
 
-        Func<Task> act = async () => await productRepository.CreateProduct(categoryName, capacity, Convert.ToDecimal(pricePerNight));
+        Func<Task> act = async () => await productRepository.CreateProduct(categoryName, capacity, pricePerNight);
 
         #endregion
 
@@ -91,7 +80,7 @@ public class ProductRepositoryTests
 
         #region Act
 
-        Func<Task> act = async () => await productRepository.EditProduct(id, categoryName, capacity, Convert.ToDecimal(pricePerNight));
+        Func<Task> act = async () => await productRepository.EditProduct(id, categoryName, capacity, pricePerNight);
 
         #endregion
 
@@ -104,7 +93,32 @@ public class ProductRepositoryTests
 
     }
 
+    [Theory]
+    [ClassData(typeof(CheckAvailabilityTestData))]
+    public async Task ProductRepository_Availability_ThrowsException(ProductCategory categoryName, DateTime startDate, DateTime endDate, Object response)
+    {
 
+        #region Arrange
+        ProductRepository productRepository = new ProductRepository(_productDataServiceFactory);
+
+        A.CallTo(() => _productDataServiceFactory.ValidateFindOneAsync(x => x.CategoryName == categoryName));
+
+        #endregion
+
+        #region Act
+
+        Func<Task> act = async () => await productRepository.Availability(categoryName, startDate, endDate);
+
+        #endregion
+
+        #region Assert
+
+        await act.Should().ThrowAsync<GenericException>()
+                .WithMessage(response.ToString());
+
+        #endregion
+
+    }
 
 }
 
@@ -113,7 +127,7 @@ public class ProductTestData : IEnumerable<object[]>
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return new object[] { ProductCategory.DoubleRoom, 0, 1, "capacity value cannot be less than 1" };
-        yield return new object[] { ProductCategory.DoubleRoom, 1, 0, "pricePerNight value cannot be less than 1"};
+        yield return new object[] { ProductCategory.DoubleRoom, 1, 0, "pricePerNight value cannot be less than 1" };
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -124,7 +138,17 @@ public class EditProductTestData : IEnumerable<object[]>
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return new object[] { 1, ProductCategory.DoubleRoom, 0, 1, "capacity value cannot be less than 1" };
-        yield return new object[] { 2, ProductCategory.DoubleRoom, 1, 0.0, "pricePerNight value cannot be less than 1"};
+        yield return new object[] { 2, ProductCategory.DoubleRoom, 1, 0, "pricePerNight value cannot be less than 1" };
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
+
+public class CheckAvailabilityTestData : IEnumerable<object[]>
+{
+    public IEnumerator<object[]> GetEnumerator()
+    {
+        yield return new object[] { ProductCategory.DoubleRoom,DateTime.Today, DateTime.Today.AddDays(-1), "End date must be greater than startDate" };
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -46,8 +46,8 @@ namespace Core.Management.Repositories
         {
             Product? product = await _productDataServiceFactory.ValidateFindOneAsync(x => x.CategoryName == categoryName, throwException: false, inverseCheck: true).ConfigureAwait(false);
 
-            if (capacity <= 0) throw new GenericException("capacity value cannot be less than 1", "DIRS21009", HttpStatusCode.PreconditionFailed);
-            if (pricePerNight <= 0) throw new GenericException("pricePerNight value cannot be less than 1", "DIRS21010", HttpStatusCode.PreconditionFailed);
+            if (capacity < 1) throw new GenericException("capacity value cannot be less than 1", "DIRS21009", HttpStatusCode.PreconditionFailed);
+            if (pricePerNight < 1) throw new GenericException("pricePerNight value cannot be less than 1", "DIRS21010", HttpStatusCode.PreconditionFailed);
 
             product = new Product
             {
@@ -65,8 +65,8 @@ namespace Core.Management.Repositories
         {
             Product product = await _productDataServiceFactory.ValidateFindOneAsync(x => x.Id == id).ConfigureAwait(false);
 
-            if (capacity.HasValue && capacity <= 0) throw new GenericException("capacity value cannot be less than 1", "DIRS21009", HttpStatusCode.PreconditionFailed);
-            if (pricePerNight.HasValue && pricePerNight <= 0) throw new GenericException("pricePerNight value cannot be less than 1", "DIRS21010", HttpStatusCode.PreconditionFailed);
+            if (capacity.HasValue && capacity < 1) throw new GenericException("capacity value cannot be less than 1", "DIRS21009", HttpStatusCode.PreconditionFailed);
+            if (pricePerNight.HasValue && pricePerNight < 1) throw new GenericException("pricePerNight value cannot be less than 1", "DIRS21010", HttpStatusCode.PreconditionFailed);
 
 
             List<(Expression<Func<Product, object>> setExpression, object setFieldValue)> setExpression = new List<(Expression<Func<Product, object>> setExpression, object setFieldValue)>();
