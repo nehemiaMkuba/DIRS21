@@ -44,13 +44,13 @@ public class ProductRepositoryTests
 
     [Theory]
     [ClassData(typeof(ProductTestData))]
-    public async Task ProductRepository_CreateProduct_ThrowsException(ProductCategory categoryName, int capacity, decimal pricePerNight, Object response)
+    public async Task ProductRepository_CreateProduct_ThrowsException(ProductCategory categoryName, int capacity, int pricePerNight, Object response)
     {
         #region Arrange
 
         ProductRepository productRepository = new ProductRepository(_productDataServiceFactory);
 
-        Product request = new() { CategoryName = categoryName, Capacity = capacity, PricePerNight = pricePerNight };
+        Product request = new() { CategoryName = categoryName, Capacity = capacity, PricePerNight = Convert.ToDecimal(pricePerNight) };
 
         A.CallTo(() => _productDataServiceFactory.ValidateFindOneAsync(x => x.CategoryName == categoryName));
 
@@ -60,7 +60,7 @@ public class ProductRepositoryTests
 
         #region Act
 
-        Func<Task> act = async () => await productRepository.CreateProduct(categoryName, capacity, pricePerNight);
+        Func<Task> act = async () => await productRepository.CreateProduct(categoryName, capacity, Convert.ToDecimal(pricePerNight));
 
         #endregion
 
@@ -74,7 +74,7 @@ public class ProductRepositoryTests
 
     [Theory]
     [ClassData(typeof(EditProductTestData))]
-    public async Task ProductRepository_EditProduct_ThrowsException(string id, ProductCategory? categoryName, int? capacity, decimal? pricePerNight, Object response)
+    public async Task ProductRepository_EditProduct_ThrowsException(string id, ProductCategory? categoryName, int? capacity, int? pricePerNight, Object response)
     {
 
         #region Arrange
@@ -91,7 +91,7 @@ public class ProductRepositoryTests
 
         #region Act
 
-        Func<Task> act = async () => await productRepository.EditProduct(id, categoryName, capacity, pricePerNight);
+        Func<Task> act = async () => await productRepository.EditProduct(id, categoryName, capacity, Convert.ToDecimal(pricePerNight));
 
         #endregion
 
@@ -104,7 +104,7 @@ public class ProductRepositoryTests
 
     }
 
- 
+
 
 }
 
@@ -113,7 +113,7 @@ public class ProductTestData : IEnumerable<object[]>
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return new object[] { ProductCategory.DoubleRoom, 0, 1, "capacity value cannot be less than 1" };
-        yield return new object[] { ProductCategory.DoubleRoom, 1, 0, "pricePerNight value cannot be less than 1", "DIRS21010" };
+        yield return new object[] { ProductCategory.DoubleRoom, 1, 0, "pricePerNight value cannot be less than 1"};
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -124,7 +124,7 @@ public class EditProductTestData : IEnumerable<object[]>
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return new object[] { 1, ProductCategory.DoubleRoom, 0, 1, "capacity value cannot be less than 1" };
-        yield return new object[] { 2, ProductCategory.DoubleRoom, 1, 0, "pricePerNight value cannot be less than 1"};
+        yield return new object[] { 2, ProductCategory.DoubleRoom, 1, 0.0, "pricePerNight value cannot be less than 1"};
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
