@@ -86,7 +86,7 @@ namespace Core.Management.Repositories
 
             Product product = await _productDataServiceFactory.ValidateFindOneAsync(x => x.CategoryName == categoryName).ConfigureAwait(false);
 
-            return !(product.BookedDates.Any(x => x.StartAt >= startDate && x.EndAt <= endDate));
+            return !product.BookedDates.Any(x => x.StartAt >= startDate && x.EndAt <= endDate);
         }
 
         public async Task<(IEnumerable<Product> products, int totalCount)> GetProductList(ProductCategory? categoryName, int? capacity, decimal? pricePerNight, string startingAfterProductId, string endingBeforeProductId)
