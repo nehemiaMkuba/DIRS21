@@ -1,4 +1,4 @@
-﻿namespace DIRS21.API.Models.DTOs.Enums
+﻿namespace API.Models.DTOs.Enums
 {
     public enum AssignableRoles
     {

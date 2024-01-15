@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace DIRS21.API
+namespace API
 {
 
     /// <summary>

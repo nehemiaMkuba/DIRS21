@@ -20,7 +20,7 @@ using Core.Management.Repositories;
 using Core.Domain.Infrastructure.Services;
 
 
-namespace DIRS21.API.Tests.Repository;
+namespace API.Tests.Repository;
 
 public class ProductRepositoryTests
 {

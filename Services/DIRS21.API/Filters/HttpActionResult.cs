@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DIRS21.API.Filters
+namespace API.Filters
 {
     public class HttpActionResult : IActionResult
     {

@@ -14,14 +14,14 @@ using AutoMapper;
 
 using Core.Domain.Enums;
 using Core.Domain.Entities;
-using DIRS21.API.Models.Common;
+using API.Models.Common;
 using Core.Management.Interfaces;
-using DIRS21.API.Attributes;
-using DIRS21.API.Models.DTOs.Requests;
-using DIRS21.API.Models.DTOs.Responses;
+using API.Attributes;
+using API.Models.DTOs.Requests;
+using API.Models.DTOs.Responses;
 using Microsoft.Extensions.Configuration;
 
-namespace DIRS21.API.Controllers
+namespace API.Controllers
 {
     [Route("v{version:apiVersion}/products"), SwaggerOrder("B")]
     [Authorize(Policy = nameof(AuthPolicy.GlobalRights))]

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-using DIRS21.API.Models.DTOs.Enums;
+using API.Models.DTOs.Enums;
 
-namespace DIRS21.API.Models.DTOs.Requests
+namespace API.Models.DTOs.Requests
 {
     /// <summary>
     /// Object to activate a client

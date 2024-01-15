@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 
 using Core.Domain.Entities;
-using DIRS21.API.Models.DTOs.Responses;
-using DIRS21.API.Models.DTOs.Requests;
+using API.Models.DTOs.Responses;
+using API.Models.DTOs.Requests;
 
-namespace DIRS21.API.Models.Mappings
+namespace API.Models.Mappings
 {
     public class MappingProfile : Profile
     {

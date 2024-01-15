@@ -1,4 +1,4 @@
-﻿namespace DIRS21.API.Models.Common
+﻿namespace API.Models.Common
 {
     public enum AuthPolicy
     {

@@ -7,10 +7,10 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
-using DIRS21.API.Models.Common;
+using API.Models.Common;
 using Core.Management.Interfaces;
 
-namespace DIRS21.API.Attributes
+namespace API.Attributes
 {
     [AttributeUsage(validOn: AttributeTargets.Class | AttributeTargets.Method)]
     public class ServerKeyAttribute : System.Attribute, IAsyncActionFilter

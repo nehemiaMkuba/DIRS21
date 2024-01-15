@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace DIRS21.API.Filters
+namespace API.Filters
 {
     public class SwaggerAuthOperationFilter : IOperationFilter
     {

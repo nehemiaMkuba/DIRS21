@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 using Core.Domain.Exceptions;
-using DIRS21.API.Models.Common;
+using API.Models.Common;
 
-namespace DIRS21.API.Filters
+namespace API.Filters
 {
     public class ExceptionFilter : IExceptionFilter
     {

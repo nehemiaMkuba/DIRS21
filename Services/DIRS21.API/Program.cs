@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sentry.Extensions.Logging;
 using Core.Management.Infrastructure.Seedwork;
 
-namespace DIRS21.API
+namespace API
 {
     public class Program
     {

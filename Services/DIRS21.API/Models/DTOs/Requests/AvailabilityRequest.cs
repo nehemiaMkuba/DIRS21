@@ -1,7 +1,7 @@
 ﻿using Core.Domain.Enums;
 using System;
 
-namespace DIRS21.API.Models.DTOs.Requests
+namespace API.Models.DTOs.Requests
 {
     public class AvailabilityRequest
     {

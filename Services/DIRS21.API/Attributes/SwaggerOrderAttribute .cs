@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DIRS21.API.Attributes
+namespace API.Attributes
 {
     /// <summary>
     /// Annotates a controller with a Swagger sorting order that is used when generating the Swagger documentation to

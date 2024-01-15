@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
-namespace DIRS21.API.Models.Common
+namespace API.Models.Common
 {
     public class VersionErrorProvider : IErrorResponseProvider
     {

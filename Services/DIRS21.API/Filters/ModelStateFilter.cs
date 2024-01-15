@@ -3,9 +3,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-using DIRS21.API.Models.Common;
+using API.Models.Common;
 
-namespace DIRS21.API.Filters
+namespace API.Filters
 {
     public class ModelStateFilter : ActionFilterAttribute
     {        

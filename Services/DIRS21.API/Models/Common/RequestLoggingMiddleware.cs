@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace DIRS21.API.Models.Common
+namespace API.Models.Common
 {
     public class RequestLoggingMiddleware
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Core.Domain.Enums;
 
-namespace DIRS21.API.Models.DTOs.Responses
+namespace API.Models.DTOs.Responses
 {
     public class ClientDto : MinifiedClientDto
     {

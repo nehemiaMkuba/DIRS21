@@ -7,12 +7,12 @@ using AutoMapper.Configuration;
 
 using Core.Domain.Enums;
 using Core.Domain.Entities;
-using DIRS21.API.Controllers;
+using API.Controllers;
 using Core.Management.Interfaces;
-using DIRS21.API.Models.DTOs.Responses;
-using DIRS21.API.Models.DTOs.Requests;
+using API.Models.DTOs.Responses;
+using API.Models.DTOs.Requests;
 
-namespace DIRS21.API.Tests.Controllers
+namespace API.Tests.Controllers
 {
     public class ProductControllerTests
     {

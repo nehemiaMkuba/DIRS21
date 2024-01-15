@@ -24,14 +24,14 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 using Core.Domain;
 using Core.Management;
-using DIRS21.API.Filters;
+using API.Filters;
 using Core.Domain.Enums;
-using DIRS21.API.Attributes;
+using API.Attributes;
 using Core.Management.Common;
-using DIRS21.API.Models.Common;
+using API.Models.Common;
 
 [assembly: ApiController]
-namespace DIRS21.API
+namespace API
 {
     public class Startup
     {

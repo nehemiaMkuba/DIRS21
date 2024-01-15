@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace DIRS21.API.Models.Common
+namespace API.Models.Common
 {
     /// <summary>
     /// Generic response status object

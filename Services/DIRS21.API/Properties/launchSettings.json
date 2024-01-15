@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DIRS21.API": {
+    "API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

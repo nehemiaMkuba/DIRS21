@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DIRS21.API.Models.DTOs.Requests
+namespace API.Models.DTOs.Requests
 {
     /// <summary>
     /// Object with parameters required to register a resource client

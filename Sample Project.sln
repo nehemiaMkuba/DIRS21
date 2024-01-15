@@ -20,13 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		..\solution items\ErrorCodes.MD = ..\solution items\ErrorCodes.MD
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DIRS21.API", "Services\DIRS21.API\DIRS21.API.csproj", "{AA07E3BB-F4F7-4530-8BD0-D3C47C0DD3EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "Services\DIRS21.API\API.csproj", "{AA07E3BB-F4F7-4530-8BD0-D3C47C0DD3EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{E70F267F-3199-4548-92C1-431C8B1A628F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DIRS21.API.Tests", "UnitTests\DIRS21.API.Tests\DIRS21.API.Tests.csproj", "{95042DCB-CBB2-4B58-B185-7C57913D2F0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Tests", "UnitTests\DIRS21.API.Tests\API.Tests.csproj", "{95042DCB-CBB2-4B58-B185-7C57913D2F0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning", "Learning\Learning.csproj", "{FBD29996-2869-4947-BC6D-B205C64BC973}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning", "Learning\Learning.csproj", "{FBD29996-2869-4947-BC6D-B205C64BC973}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

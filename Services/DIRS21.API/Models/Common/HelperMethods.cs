@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.ComponentModel;
 
-namespace DIRS21.API.Models.Common
+namespace API.Models.Common
 {
     public static class HelperMethods
     {

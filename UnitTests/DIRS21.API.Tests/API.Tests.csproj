@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\DIRS21.API\DIRS21.API.csproj" />
+    <ProjectReference Include="..\..\Services\DIRS21.API\API.csproj" />
   </ItemGroup>
 
 </Project>
