@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Learning.Behaviors
+namespace CQRS.Behaviors
 {
     public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : IRequest<TResponse>

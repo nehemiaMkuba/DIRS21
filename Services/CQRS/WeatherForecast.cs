@@ -1,4 +1,4 @@
-namespace Learning
+namespace CQRS
 {
     public class WeatherForecast
     {

@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Learning": {
+    "CQRS": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -1,8 +1,8 @@
-﻿using Learning.Commands;
-using Learning.Models;
+﻿using CQRS.Commands;
+using CQRS.Models;
 using MediatR;
 
-namespace Learning.Handlers
+namespace CQRS.Handlers
 {
     public class AddProductHandler : IRequestHandler<AddProductCommand, Product>
     {

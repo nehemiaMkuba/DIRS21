@@ -1,12 +1,12 @@
-﻿using Learning.Commands;
-using Learning.Models;
-using Learning.Notifications;
-using Learning.Queries;
+﻿using CQRS.Commands;
+using CQRS.Models;
+using CQRS.Notifications;
+using CQRS.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Learning.Controllers
+namespace CQRS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

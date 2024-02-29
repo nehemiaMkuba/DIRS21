@@ -1,7 +1,7 @@
-﻿using Learning.Models;
+﻿using CQRS.Models;
 using MediatR;
 
-namespace Learning.Notifications
+namespace CQRS.Notifications
 {
     public record ProductAddedNotification(Product Product) : INotification;
 }

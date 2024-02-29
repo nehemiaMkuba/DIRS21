@@ -1,7 +1,7 @@
-﻿using Learning.Models;
+﻿using CQRS.Models;
 using MediatR;
 
-namespace Learning.Queries
+namespace CQRS.Queries
 {
     public record GetProductsQuery() : IRequest<IEnumerable<Product>>;
 }

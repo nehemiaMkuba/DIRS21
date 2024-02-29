@@ -1,4 +1,4 @@
-﻿namespace Learning.Models
+﻿namespace CQRS.Models
 {
     public class Product
     {

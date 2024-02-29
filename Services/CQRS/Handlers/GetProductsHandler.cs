@@ -1,8 +1,8 @@
-﻿using Learning.Models;
-using Learning.Queries;
+﻿using CQRS.Models;
+using CQRS.Queries;
 using MediatR;
 
-namespace Learning.Handlers
+namespace CQRS.Handlers
 {
     public class GetProductsHandler : IRequestHandler<GetProductsQuery, IEnumerable<Product>>
     {

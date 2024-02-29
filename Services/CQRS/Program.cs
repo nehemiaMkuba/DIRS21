@@ -1,6 +1,6 @@
 using FluentValidation;
-using Learning.Behaviors;
-using Learning.Models;
+using CQRS.Behaviors;
+using CQRS.Models;
 using MediatR;
 using System.Reflection;
 

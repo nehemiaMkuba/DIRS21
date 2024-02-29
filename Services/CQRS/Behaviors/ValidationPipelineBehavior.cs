@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 
-namespace Learning.Behaviors
+namespace CQRS.Behaviors
 {
     // ValidationPipelineBehavior.cs
 

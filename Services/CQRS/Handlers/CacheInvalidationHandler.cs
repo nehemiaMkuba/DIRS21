@@ -1,8 +1,8 @@
-﻿using Learning.Models;
-using Learning.Notifications;
+﻿using CQRS.Models;
+using CQRS.Notifications;
 using MediatR;
 
-namespace Learning.Handlers
+namespace CQRS.Handlers
 {
     public class CacheInvalidationHandler : INotificationHandler<ProductAddedNotification>
     {
